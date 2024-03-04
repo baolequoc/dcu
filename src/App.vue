@@ -1,24 +1,9 @@
 <script setup>
-import { RouterLink, RouterView } from "vue-router";
-import HelloWorld from "./components/HelloWorld.vue";
-import LogoSVG from "./assets/logo.svg?component";
+import HomeView from "./views/HomeView.vue";
 </script>
 
 <template>
-  <header>
-    <LogoSVG alt="Vite logo" class="logo" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <HomeView />
 </template>
 
 <style scoped>
