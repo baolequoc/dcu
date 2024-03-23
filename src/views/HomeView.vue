@@ -1,6 +1,12 @@
 <script setup>
 import CardComponent from "./CardComponent.vue";
-import { ref } from "vue";
+import { useProvideFirebaseStore } from "../composable/useFirebase";
+import { onMounted } from "vue";
+const { getMonitor } = useProvideFirebaseStore();
+
+onMounted(async () => {
+  await getMonitor();
+});
 </script>
 
 <template>
@@ -25,8 +31,8 @@ import { ref } from "vue";
       <CardComponent
         :title="'Điều khiển'"
         img="https://i.postimg.cc/MKrXT6VP/126530819-control-outline-icon-thin-line-concept-element-from-business-management-icons-collection-c.jpg"
+        :url="'/control'"
       />
-      <CardComponent :title="'Hiệu xuất'" />
     </div>
   </div>
 </template>
