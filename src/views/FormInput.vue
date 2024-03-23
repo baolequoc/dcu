@@ -1,12 +1,10 @@
 <template>
   <div class="flex items-center space-x-4">
     <label
-      class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 w-20"
-      for="d"
+      class="flex text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 w-20 h-20 bg-orange-400 justify-center items-center rounded-full"
     >
-      {{ title }}
+      <span>{{ title }} </span>
     </label>
-    {{ modelValue }}
     <input
       type="text"
       :value="modelValue"

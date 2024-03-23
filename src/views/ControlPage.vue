@@ -143,7 +143,6 @@ watch(
 watch(
   () => runCmVal.value,
   (value) => {
-    console.log("🚀 ~ value:", value);
     writeData({
       "VIRTUAL RUN CM": {
         data: value,
@@ -256,12 +255,14 @@ watch(
                   :disabled="disabledManualMode"
                   v-model="runCmVal"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                  :class="{
+                    'cursor-not-allowed opacity-70': disabledManualMode,
+                  }"
                 >
                   <option value="1">Stop</option>
                   <option value="2">FWD</option>
                   <option value="4">REV</option>
                 </select>
-                {{ runCmVal }}
               </div>
             </div>
           </div>
