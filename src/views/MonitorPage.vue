@@ -1,8 +1,9 @@
 <script setup>
-import MonitorItem from "./MonitorItem.vue";
 import { useFirebaseStore } from "../composable/useFirebase";
-import { onMounted } from "vue";
-
+import { onMounted, ref, watch } from "vue";
+import FormInput from "./FormInput.vue";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 const {
   pressure,
   current,
@@ -11,9 +12,10 @@ const {
   van1,
   van2,
   speed,
+  setPoint,
   voltage,
+  mode,
   getMonitor,
-  writeData,
   power,
 } = useFirebaseStore();
 
@@ -21,17 +23,60 @@ onMounted(async () => {
   await getMonitor();
 });
 
-// writeData(30);
+const triggerPress = ref("50");
+const count = ref(0);
+
+watch(
+  () => pressure.value,
+  (value) => {
+    count.value++;
+    if (Number(value) > Number(triggerPress.value) && count.value > 1) {
+      triggerPressureNotification();
+    }
+  }
+);
+
+const triggerPressureNotification = () => {
+  toast.error(
+    "Pressure: " +
+      pressure.value +
+      "is greater than " +
+      triggerPress.value +
+      " Pa"
+  );
+};
+
+watch(
+  () => temp.value,
+  (value) => {
+    //
+    if (mode.value === "0" && value > setPoint.value) {
+      toast.info("Temp current is greater set point");
+    }
+  }
+);
+
+watch(
+  () => setPoint.value,
+  (value) => {
+    //
+    if (mode.value === "0" && temp.value > value) {
+      toast.info("Temp current is greater set point");
+    }
+  }
+);
 </script>
 
 <template>
   <div class="w-full h-full flex flex-col">
     <div class="flex flex-col">
-      <img
-        src="https://i.postimg.cc/Pr1Kdf31/banner-UTE.png"
-        border="0"
-        alt="banner-UTE"
-      />
+      <router-link :to="'/'">
+        <img
+          src="https://i.postimg.cc/Pr1Kdf31/banner-UTE.png"
+          class="w-full"
+          alt="banner-UTE"
+        />
+      </router-link>
       <h1
         class="w-full flex justify-center items-center p-4 bg-sky-200 font-semibold text-2xl text-gray-700"
       >
@@ -43,6 +88,9 @@ onMounted(async () => {
         class="h-20 flex justify-center text-4xl uppercase text-white text-bold w-full items-center"
       >
         Trang giám sát
+      </div>
+      <div class="flex justify-end text-white mr-4">
+        <FormInput :title="'Trigger'" v-model:model-value="triggerPress" />
       </div>
       <div class="text-white p-8 grid grid-cols-2 gap-4 w-full h-full">
         <div class="flex flex-col space-y-6 items-center">

@@ -2,6 +2,8 @@
 import FormInput from "./FormInput.vue";
 import { computed, onMounted, ref, watch } from "vue";
 import { useFirebaseStore } from "../composable/useFirebase";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 
 const {
   getControl,
@@ -17,6 +19,7 @@ const {
   frq,
   dec,
   acc,
+  temp,
   writeData,
 } = useFirebaseStore();
 
@@ -151,15 +154,38 @@ watch(
     });
   }
 );
+
+watch(
+  () => setPoint.value,
+  (value) => {
+    //
+    if (mode.value === "0" && temp.value > value) {
+      toast.info("Temp current is greater set point");
+    }
+  }
+);
+
+watch(
+  () => temp.value,
+  (value) => {
+    //
+    if (mode.value === "0" && value > setPoint.value) {
+      toast.info("Temp current is greater set point");
+    }
+  }
+);
 </script>
 
 <template>
   <div class="w-full h-full flex flex-col">
     <div class="flex flex-col">
-      <img
-        src="https://i.postimg.cc/Pr1Kdf31/banner-UTE.png"
-        alt="banner-UTE"
-      />
+      <router-link :to="'/'" class="flex">
+        <img
+          class="w-full"
+          src="https://i.postimg.cc/Pr1Kdf31/banner-UTE.png"
+          alt="banner-UTE"
+        />
+      </router-link>
       <h1
         class="w-full flex justify-center items-center p-4 bg-sky-200 font-semibold text-2xl text-gray-700"
       >
