@@ -20,7 +20,7 @@ onMounted(async () => {
       <h1
         class="w-full flex justify-center items-center p-4 bg-sky-200 font-semibold text-2xl text-gray-700"
       >
-        ỨNG DỤNG BMS VÀO ĐIỀU KHIỂN FCU TRONG PHÒNG THÍ NGIỆM
+        ỨNG DỤNG BMS GIÁM SÁT VÀ ĐIỀU KHIỂN HỆ THỐNG FCU KẾT HỢP CHILLER
       </h1>
     </div>
     <div class="flex justify-center space-x-32 p-32 bg-sky-100 h-full">
