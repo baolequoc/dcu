@@ -100,7 +100,6 @@ const [useProvideFirebaseStore, _useFirebaseStore] = createInjectionState(
       const controlRef = ref(database, CONTROL_COL);
       onValue(controlRef, (snapshot) => {
         const data = snapshot.val();
-        console.log("🚀 ~ onValue ~ data:", data);
         dataControl.value = data;
       });
     }
@@ -114,23 +113,6 @@ const [useProvideFirebaseStore, _useFirebaseStore] = createInjectionState(
       }
       set(ref(database, CONTROL_COL), newControlData);
     }
-
-    // function writeDataModeAuto(setPoint, minAo, maxAo) {
-    //   set(ref(database, MONITOR_COL), {
-    // "SET POINT": {
-    //   data: setPoint,
-    //   status: true,
-    // },
-    // "MIN AO": {
-    //   data: minAo,
-    //   status: true,
-    // },
-    // "MAX AO": {
-    //   data: maxAo,
-    //   status: true,
-    // },
-    //   });
-    // }
 
     return {
       app,
