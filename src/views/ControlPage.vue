@@ -62,7 +62,7 @@ watch(
   (value) => {
     writeData({
       "VIRTUAL LOCK": {
-        data: value ? "1" : "0",
+        data: !value ? "1" : "0",
         status: true,
       },
     });
