@@ -1,11 +1,9 @@
 <template>
   <div
-    class="flex items-center justify-center bg-[#ADD8E6] text-[#36454f] rounded-xl space-x-4"
+    class="flex flex-col bg-blue-400 border rounded w-40 h-40 justify-center items-center border-blue-400 text-white"
   >
-    <div class="flex flex-col">
-      <div class="text-xl font-semibold">{{ label }}</div>
-      <div class="text-lg font-medium">{{ value }} {{ unit }}</div>
-    </div>
+    <div class="text-xl font-semibold">{{ label }}</div>
+    <div class="text-lg font-medium">{{ value }} {{ unit }}</div>
   </div>
 </template>
 <script setup>
