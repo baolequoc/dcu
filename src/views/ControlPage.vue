@@ -4,7 +4,11 @@ import { computed, onMounted, ref, watch } from "vue";
 import { useFirebaseStore } from "../composable/useFirebase";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
-
+import OnOffComponent from "./OnOffComponent.vue";
+import HeaderPage from "./HeaderPage.vue";
+import ToggleComponent from "./ToggleComponent.vue";
+import RunCMD from "./RunCMD.vue";
+import HeaderTitle from "./HeaderTitle.vue";
 const {
   getControl,
   p,
@@ -139,15 +143,15 @@ watch(
   }
 );
 
-watch(
-  () => setPoint.value,
-  (value) => {
-    //
-    if (mode.value === "0" && temp.value > value) {
-      toast.info("Temp current is greater set point");
-    }
-  }
-);
+// watch(
+//   () => setPoint.value,
+//   (value) => {
+//     //
+//     if (mode.value === "0" && temp.value > value) {
+//       toast.info("Temp current is greater set point");
+//     }
+//   }
+// );
 
 watch(
   () => temp.value,
@@ -209,122 +213,81 @@ function submit() {
 
 <template>
   <div class="w-full h-full flex flex-col">
-    <div class="flex flex-col">
-      <router-link :to="'/'" class="flex">
-        <img
-          class="w-full"
-          src="https://i.postimg.cc/Pr1Kdf31/banner-UTE.png"
-          alt="banner-UTE"
-        />
-      </router-link>
-      <h1
-        class="w-full flex justify-center items-center p-4 bg-sky-200 font-semibold text-2xl text-gray-700"
-      >
-        ỨNG DỤNG BMS VÀO ĐIỀU KHIỂN FCU TRONG PHÒNG THÍ NGIỆM
-      </h1>
-    </div>
-    <div class="flex flex-col bg-sky-100 h-full w-full">
-      <div
-        class="h-20 flex justify-center text-2xl text-bold bg-white w-full items-center text-slate-800"
-      >
-        Trang điều khiển
-      </div>
-      <div class="flex space-x-8 justify-center">
-        <div class="flex flex-col w-64 space-y-4 mt-8">
-          <div>
-            <label class="inline-flex items-center cursor-pointer">
-              <input type="checkbox" class="sr-only peer" v-model="lockVal" />
-              <div
-                class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
-              ></div>
-              <span class="pl-5 ms-3 text-sm font-medium text-gray-900"
-                >LOCK</span
-              >
-            </label>
+    <HeaderPage />
+    <div class="flex flex-col h-full w-full">
+      <HeaderTitle :title="'Control Page'" />
+      <div class="flex justify-center bg-[#F7EEDD] h-full">
+        <div class="flex flex-col space-y-4 mt-8">
+          <div
+            class="flex justify-center space-x-8 border-2 p-2 rounded-xl bg-white"
+          >
+            <ToggleComponent
+              v-model="modeVal"
+              :secondLabel="'MANUAL'"
+              :firstLabel="'AUTO'"
+            />
+            <ToggleComponent
+              v-model="lockVal"
+              :secondLabel="'LOCK'"
+              :firstLabel="'UNLOCK'"
+            />
           </div>
-
-          <FormInput :title="'D'" :model-value="d" :disabled="true" />
-          <FormInput :title="'P'" :model-value="p" :disabled="true" />
-          <FormInput :title="'i'" :model-value="i" :disabled="true" />
-        </div>
-
-        <div class="flex flex-col">
-          <div class="flex flex-col w-64 space-y-4 mt-8">
-            <div>
-              <label class="inline-flex items-center cursor-pointer">
-                <span class="pr-5 ms-3 text-sm font-medium text-gray-900"
-                  >AUTO</span
-                >
-                <input type="checkbox" class="sr-only peer" v-model="modeVal" />
-                <div
-                  class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
-                ></div>
-                <span class="pl-5 ms-3 text-sm font-medium text-gray-900"
-                  >MANUAL</span
-                >
-              </label>
+          <div class="flex space-x-8 border-2 p-2 rounded-xl bg-white">
+            <div class="space-y-2">
+              <FormInput
+                :title="'Set point'"
+                v-model="setPointVal"
+                :disabled="disabledAutoMode"
+              />
+              <FormInput
+                :title="'Min AO 1'"
+                v-model="minAo"
+                :disabled="disabledAutoMode"
+              />
+              <FormInput
+                :title="'Max AO 1'"
+                v-model="maxAo"
+                :disabled="disabledAutoMode"
+              />
+              <FormInput :title="'D'" :model-value="d" :disabled="true" />
+              <FormInput :title="'P'" :model-value="p" :disabled="true" />
+              <FormInput :title="'i'" :model-value="i" :disabled="true" />
             </div>
-            <div class="flex space-x-8">
-              <div class="space-y-4">
-                <FormInput
-                  :title="'Set point'"
-                  v-model="setPointVal"
-                  :disabled="disabledAutoMode"
-                />
-                <FormInput
-                  :title="'Min AO 1'"
-                  v-model="minAo"
-                  :disabled="disabledAutoMode"
-                />
-                <FormInput
-                  :title="'Max AO 1'"
-                  v-model="maxAo"
-                  :disabled="disabledAutoMode"
-                />
-              </div>
-              <div class="space-y-4">
-                <FormInput
-                  :title="'FRQ'"
-                  v-model="frqVal"
-                  :disabled="disabledManualMode"
-                />
-                <FormInput
-                  :title="'ACC'"
-                  v-model="accVal"
-                  :disabled="disabledManualMode"
-                />
-                <FormInput
-                  :title="'DEC'"
-                  v-model="decVal"
-                  :disabled="disabledManualMode"
-                />
-                <div class="flex flex-col">
-                  <label
-                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-32"
-                    >Run cmd</label
-                  >
-                  <select
-                    :disabled="disabledManualMode"
-                    v-model="runCmVal"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    :class="{
-                      'cursor-not-allowed opacity-70': disabledManualMode,
-                    }"
-                  >
-                    <option value="1">Stop</option>
-                    <option value="2">FWD</option>
-                    <option value="4">REV</option>
-                  </select>
-                </div>
-              </div>
-              <button
-                class="bg-blue-500 text-white py-2 rounded w-full px-2"
-                @click="submit"
-              >
-                Submit
-              </button>
+            <div class="space-y-2">
+              <OnOffComponent
+                :label="'Thermostat:'"
+                v-model="modeVal"
+                :disabled="disabledManualMode"
+              />
+              <OnOffComponent
+                :label="'Valve:'"
+                v-model="modeVal"
+                :disabled="disabledManualMode"
+              />
+              <FormInput
+                :title="'FRQ'"
+                v-model="frqVal"
+                :disabled="disabledManualMode"
+              />
+              <FormInput
+                :title="'ACC'"
+                v-model="accVal"
+                :disabled="disabledManualMode"
+              />
+              <FormInput
+                :title="'DEC'"
+                v-model="decVal"
+                :disabled="disabledManualMode"
+              />
+              <RunCMD v-model="runCmVal" :disabled="disabledManualMode" />
             </div>
           </div>
+          <button
+            class="bg-blue-500 text-white py-2 rounded w-full px-2"
+            @click="submit"
+          >
+            Submit
+          </button>
         </div>
       </div>
     </div>

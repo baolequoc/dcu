@@ -1,0 +1,39 @@
+<template>
+  <div class="flex items-center space-x-4">
+    <label
+      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-28 mr-4"
+      >Run cmd</label
+    >
+    <select
+      :disabled="disabledManualMode"
+      v-model="runCmVal"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+      :class="{
+        'cursor-not-allowed opacity-70': disabledManualMode,
+      }"
+    >
+      <option value="1">Stop</option>
+      <option value="2">FWD</option>
+      <option value="4">REV</option>
+    </select>
+  </div>
+</template>
+<script setup>
+import { computed } from "vue";
+
+const props = defineProps({
+  disabledManualMode: {
+    type: Boolean,
+    default: false,
+  },
+  modelValue: {
+    type: String,
+    default: "1",
+  },
+});
+const emit = defineEmits(["update:modelValue"]);
+const runCmVal = computed({
+  get: () => props.modelValue,
+  set: (value) => emit("update:modelValue", value),
+});
+</script>
