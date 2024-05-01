@@ -255,22 +255,22 @@ function submit() {
                 img="https://static.vecteezy.com/system/resources/previews/006/559/603/original/voltmeter-line-icon-vector.jpg"
               />
               <FormInput
-                :title="'D'"
-                :model-value="d"
-                :disabled="true"
-                img="https://i.imgur.com/bkA0Lub.png"
-              />
-              <FormInput
                 :title="'P'"
                 :model-value="p"
                 :disabled="true"
                 img="https://i.imgur.com/KjJ0ysV.png"
               />
               <FormInput
-                :title="'i'"
+                :title="'I'"
                 :model-value="i"
                 :disabled="true"
                 img="https://i.imgur.com/thbClFL.png"
+              />
+              <FormInput
+                :title="'D'"
+                :model-value="d"
+                :disabled="true"
+                img="https://i.imgur.com/bkA0Lub.png"
               />
             </div>
             <div class="space-y-2">

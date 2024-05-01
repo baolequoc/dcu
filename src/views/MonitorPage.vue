@@ -122,13 +122,13 @@ watch(
               :label="'Room Temp'"
               :value="temp"
               :unit="'oC'"
-              class="!bg-white border-2 border-blue-500 rounded-xl p-4 text-black"
+              class="!bg-white border-2 border-blue-500 rounded-full p-4 text-black"
             />
             <MonitorValue
               :label="'Set Point'"
               :value="setPoint"
               :unit="'oC'"
-              class="!bg-white border-2 border-blue-500 rounded-xl p-4 text-black ml-4"
+              class="!bg-white border-2 border-blue-500 rounded-full p-4 text-black ml-4"
             />
           </div>
           <div class="h-[400px] w-[700px]">
@@ -149,18 +149,44 @@ watch(
               <StatusComponent :label="'Van 2'" :value="van2" />
             </div>
             <div class="flex space-x-4">
-              <MonitorValue :label="'Ampere'" :value="current" :unit="'A'" />
-              <MonitorValue :label="'Voltage'" :value="voltage" :unit="'V'" />
-              <MonitorValue :label="'Power'" :value="power" :unit="'kW'" />
+              <MonitorValue
+                :label="'Ampere'"
+                :value="current"
+                :unit="'A'"
+                img="https://i.imgur.com/CvU3twv.png"
+              />
+              <MonitorValue
+                :label="'Voltage'"
+                :value="voltage"
+                :unit="'V'"
+                img="https://i.imgur.com/R9Y2RWp.png"
+              />
+              <MonitorValue
+                :label="'Power'"
+                :value="power"
+                :unit="'kW'"
+                img="https://i.imgur.com/cHtwDQU.png"
+              />
             </div>
             <div class="flex space-x-4">
-              <MonitorValue :label="'Speed'" :value="speed" :unit="'v/ph'" />
+              <MonitorValue
+                :label="'Speed'"
+                :value="speed"
+                :unit="'v/ph'"
+                img="https://i.imgur.com/VqDuGPM.png"
+              />
               <MonitorValue
                 :label="'Pressure'"
                 :value="pressure"
                 :unit="'pH'"
+                img="https://i.imgur.com/6g3cji9.png"
               />
-              <MonitorValue :label="'Out Frq'" :value="outFrq" :unit="'Hz'" />
+              <MonitorValue
+                :label="'Out Frq'"
+                :value="outFrq"
+                :unit="'Hz'"
+                img="https://i.imgur.com/UHRIiBQ.png"
+              />
             </div>
           </div>
         </div>
