@@ -8,7 +8,7 @@
         class="w-5 h-5"
       />
     </div>
-    <label class="mb-2 text-sm font-medium text-gray-900 dark:text-white mr-4"
+    <label class="mb-2 text-sm font-medium text-gray-900 mr-4"
       >Run command</label
     >
     <select

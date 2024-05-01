@@ -30,6 +30,7 @@ const {
 } = useFirebaseStore();
 
 const modeVal = ref(mode.value === "1");
+console.log("🚀 ~ mode.value:", mode.value);
 const lockVal = ref(lock.value === "0");
 
 //  Auto mode
@@ -42,8 +43,8 @@ const decVal = ref(dec.value);
 const setPointVal = ref(setPoint.value);
 const minAoVal = ref(minAo.value);
 const maxAoVal = ref(maxAo.value);
-const thermoStatVal = ref(thermoStat.value);
-const valveVal = ref(valve.value);
+const thermoStatVal = ref(thermoStat.value === "1");
+const valveVal = ref(valve.value === "1");
 
 const disabledAutoMode = computed(() => {
   if (lockVal.value) return true;
@@ -91,6 +92,17 @@ watch(
   (value) => {
     writeData({
       "O ENABLE": {
+        data: value ? "1" : "0",
+        status: true,
+      },
+    });
+  }
+);
+watch(
+  () => thermoStatVal.value,
+  (value) => {
+    writeData({
+      "ON OFF THERMOSTAT": {
         data: value ? "1" : "0",
         status: true,
       },
@@ -148,6 +160,20 @@ watch(
 );
 
 watch(
+  () => thermoStat.value,
+  (value) => {
+    thermoStatVal.value = value === "1";
+  }
+);
+
+watch(
+  () => valve.value,
+  (value) => {
+    valveVal.value = value === "1";
+  }
+);
+
+watch(
   () => setPoint.value,
   (value) => {
     //
@@ -183,6 +209,14 @@ watch(
 
 const submitAutoMode = () => {
   writeData({
+    "ON OFF THERMOSTAT": {
+      data: thermoStatVal.value ? "1" : "0",
+      status: true,
+    },
+    "VIRTUAL OE VALVE": {
+      data: valveVal.value ? "1" : "0",
+      status: true,
+    },
     "O VALUE": {
       data: frqVal.value,
       status: true,
@@ -240,14 +274,15 @@ function submit() {
             class="flex justify-center space-x-8 border-2 rounded-xl bg-white p-4 border-blue-500"
           >
             <ToggleComponent
-              v-model="modeVal"
-              :secondLabel="'MANUAL'"
-              :firstLabel="'AUTO'"
-            />
-            <ToggleComponent
               v-model="lockVal"
               :secondLabel="'LOCK'"
               :firstLabel="'UNLOCK'"
+            />
+            <ToggleComponent
+              v-model="modeVal"
+              :secondLabel="'MANUAL'"
+              :firstLabel="'AUTO'"
+              :disabled="lockVal"
             />
           </div>
           <div
@@ -262,13 +297,13 @@ function submit() {
               />
               <FormInput
                 :title="'Min AO 1'"
-                v-model="minAo"
+                v-model="minAoVal"
                 :disabled="disabledAutoMode"
                 img="https://static.vecteezy.com/system/resources/previews/006/559/603/original/voltmeter-line-icon-vector.jpg"
               />
               <FormInput
                 :title="'Max AO 1'"
-                v-model="maxAo"
+                v-model="maxAoVal"
                 :disabled="disabledAutoMode"
                 img="https://static.vecteezy.com/system/resources/previews/006/559/603/original/voltmeter-line-icon-vector.jpg"
               />
@@ -320,11 +355,16 @@ function submit() {
                 v-model="decVal"
                 :disabled="disabledManualMode"
               />
-              <RunCMD v-model="runCmVal" :disabled="disabledManualMode" />
+              <RunCMD
+                v-model="runCmVal"
+                :disabledManualMode="disabledManualMode"
+              />
             </div>
           </div>
           <button
             class="bg-blue-500 text-white py-2 rounded w-full px-2"
+            :disabled="lockVal"
+            :class="{ 'cursor-not-allowed bg-slate-500': lockVal }"
             @click="submit"
           >
             Submit
