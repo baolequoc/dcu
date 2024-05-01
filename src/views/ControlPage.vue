@@ -213,7 +213,7 @@ const submitAutoMode = () => {
       data: thermoStatVal.value ? "1" : "0",
       status: true,
     },
-    "VIRTUAL OE VALVE": {
+    "VIRTUAL OV VALVE": {
       data: valveVal.value ? "1" : "0",
       status: true,
     },

@@ -91,7 +91,7 @@ const [useProvideFirebaseStore, _useFirebaseStore] = createInjectionState(
       return dataControl?.value["ON OFF THERMOSTAT"]?.data || "0";
     });
     const valve = computed(() => {
-      return dataControl?.value["VIRTUAL OE VALVE"]?.data || "0";
+      return dataControl?.value["VIRTUAL OV VALVE"]?.data || "0";
     });
 
     async function getMonitor() {
