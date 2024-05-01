@@ -24,6 +24,8 @@ const {
   dec,
   acc,
   temp,
+  thermoStat,
+  valve,
   writeData,
 } = useFirebaseStore();
 
@@ -40,6 +42,8 @@ const decVal = ref(dec.value);
 const setPointVal = ref(setPoint.value);
 const minAoVal = ref(minAo.value);
 const maxAoVal = ref(maxAo.value);
+const thermoStatVal = ref(thermoStat.value);
+const valveVal = ref(valve.value);
 
 const disabledAutoMode = computed(() => {
   if (lockVal.value) return true;
@@ -290,13 +294,13 @@ function submit() {
             <div class="space-y-2">
               <OnOffComponent
                 :label="'Thermostat:'"
-                v-model="modeVal"
+                v-model="thermoStatVal"
                 :disabled="disabledManualMode"
                 img="https://th.bing.com/th/id/OIP.z9KFg0Bp6el2SPpkRf4kBQHaHa?rs=1&pid=ImgDetMain"
               />
               <OnOffComponent
                 :label="'Valve:'"
-                v-model="modeVal"
+                v-model="valveVal"
                 :disabled="disabledManualMode"
                 img="https://i.imgur.com/MbOCXYA.png"
               />

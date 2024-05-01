@@ -87,6 +87,12 @@ const [useProvideFirebaseStore, _useFirebaseStore] = createInjectionState(
     const acc = computed(() => {
       return dataControl?.value["VIRTUAL ACC"]?.data || "0";
     });
+    const thermoStat = computed(() => {
+      return dataControl?.value["ON OFF THERMOSTAT"]?.data || "0";
+    });
+    const valve = computed(() => {
+      return dataControl?.value["VIRTUAL OE VALVE"]?.data || "0";
+    });
 
     async function getMonitor() {
       const monitorRef = ref(database, MONITOR_COL);
@@ -101,6 +107,7 @@ const [useProvideFirebaseStore, _useFirebaseStore] = createInjectionState(
       onValue(controlRef, (snapshot) => {
         const data = snapshot.val();
         dataControl.value = data;
+        console.log("🚀 ~ onValue ~ data:", data);
       });
     }
 
@@ -141,6 +148,8 @@ const [useProvideFirebaseStore, _useFirebaseStore] = createInjectionState(
       dec,
       acc,
       writeData,
+      thermoStat,
+      valve,
     };
   }
 );
