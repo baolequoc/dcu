@@ -157,7 +157,7 @@ watch(
         <div class="mt-4 ml-2">
           <FormInput
             :title="'Trigger'"
-            v-model:model-value="triggerPress"
+            v-model="triggerPress"
             class="border-2 border-blue-500 rounded-xl p-4 h-32 mb-2"
           />
           <div
