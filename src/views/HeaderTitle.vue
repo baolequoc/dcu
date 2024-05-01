@@ -1,6 +1,6 @@
 <template>
   <div
-    class="h-20 flex justify-center text-2xl text-bold bg-[#ACE2E1] w-full items-center text-slate-800"
+    class="h-20 flex justify-center text-2xl text-bold w-full items-center text-slate-800 font-semibold"
   >
     {{ title }}
   </div>

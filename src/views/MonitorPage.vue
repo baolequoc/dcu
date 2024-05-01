@@ -73,7 +73,12 @@ watch(
   () => pressure.value,
   (value) => {
     count.value++;
-    if (Number(value) > Number(triggerPress.value) && count.value > 1) {
+    if (
+      value &&
+      triggerPress.value &&
+      Number(value) > Number(triggerPress.value) &&
+      count.value > 1
+    ) {
       triggerPressureNotification();
     }
   }
@@ -93,7 +98,14 @@ watch(
   () => temp.value,
   (value) => {
     //
-    if (mode.value === "0" && value > setPoint.value) {
+    if (
+      mode.value === "0" &&
+      value &&
+      setPoint.value &&
+      Number(value) > Number(setPoint.value)
+    ) {
+      console.log("🚀 ~ temp:", temp.value);
+      console.log("🚀 ~ setPoint.value:", setPoint.value);
       toast.info("Temp current is greater set point");
     }
   }
@@ -103,7 +115,14 @@ watch(
   () => setPoint.value,
   (value) => {
     //
-    if (mode.value === "0" && temp.value > value) {
+    if (
+      mode.value === "0" &&
+      temp.value &&
+      value &&
+      Number(temp.value) > Number(value)
+    ) {
+      console.log("🚀 ~ temp:", temp.value);
+      console.log("🚀 ~ setPoint.value:", setPoint.value);
       toast.info("Temp current is greater set point");
     }
   }
@@ -114,7 +133,7 @@ watch(
   <div class="w-full h-full flex flex-col">
     <HeaderPage />
     <div class="flex flex-col h-full w-full">
-      <HeaderTitle :title="'Monitor page'" />
+      <HeaderTitle :title="'MONITOR'" />
       <div class="flex justify-center mt-4">
         <div class="flex flex-col space-y-4">
           <div class="flex space-x-4 justify-center">

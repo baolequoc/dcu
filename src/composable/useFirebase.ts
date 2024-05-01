@@ -8,14 +8,14 @@ const CONTROL_COL = "Control";
 const [useProvideFirebaseStore, _useFirebaseStore] = createInjectionState(
   () => {
     const firebaseConfig = {
-      apiKey: "AIzaSyBKfpuek5zLjvyFZrEqljUYsMLIa6Zkl1Q",
-      authDomain: "fir-1817a.firebaseapp.com",
-      databaseURL: "https://fir-1817a-default-rtdb.firebaseio.com",
-      projectId: "fir-1817a",
-      storageBucket: "fir-1817a.appspot.com",
-      messagingSenderId: "700546548136",
-      appId: "1:700546548136:web:b21313bdfa21910bf41d9d",
-      measurementId: "G-P1T35DBV2F",
+      apiKey: "AIzaSyCVlp0Gzu5zECLgniWMLo8qkxWDCaz70fs",
+      authDomain: "bulul2.firebaseapp.com",
+      databaseURL: "https://bulul2-default-rtdb.firebaseio.com",
+      projectId: "bulul2",
+      storageBucket: "bulul2.appspot.com",
+      messagingSenderId: "699243697856",
+      appId: "1:699243697856:web:d9deab885864d0f420ff25",
+      measurementId: "G-GZ30SM2GRC",
     };
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);

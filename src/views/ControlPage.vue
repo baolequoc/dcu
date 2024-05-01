@@ -143,21 +143,35 @@ watch(
   }
 );
 
-// watch(
-//   () => setPoint.value,
-//   (value) => {
-//     //
-//     if (mode.value === "0" && temp.value > value) {
-//       toast.info("Temp current is greater set point");
-//     }
-//   }
-// );
+watch(
+  () => setPoint.value,
+  (value) => {
+    //
+    if (
+      mode.value === "0" &&
+      temp.value &&
+      value &&
+      Number(temp.value) > Number(value)
+    ) {
+      console.log("🚀 ~ temp:", temp.value);
+      console.log("🚀 ~ setPoint.value:", setPoint.value);
+      toast.info("Temp current is greater set point");
+    }
+  }
+);
 
 watch(
   () => temp.value,
   (value) => {
     //
-    if (mode.value === "0" && value > setPoint.value) {
+    if (
+      mode.value === "0" &&
+      value &&
+      setPoint.value &&
+      value > setPoint.value
+    ) {
+      console.log("🚀 ~ temp:", temp.value);
+      console.log("🚀 ~ setPoint.value:", setPoint.value);
       toast.info("Temp current is greater set point");
     }
   }
@@ -215,7 +229,7 @@ function submit() {
   <div class="w-full h-full flex flex-col">
     <HeaderPage />
     <div class="flex flex-col h-full w-full">
-      <HeaderTitle :title="'Control Page'" />
+      <HeaderTitle :title="'CONTROL'" />
       <div class="flex justify-center h-full">
         <div class="flex flex-col space-y-4 mt-8">
           <div
