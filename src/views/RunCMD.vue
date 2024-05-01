@@ -1,13 +1,20 @@
 <template>
   <div class="flex items-center space-x-4">
-    <label
-      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white w-28 mr-4"
-      >Run cmd</label
+    <div>
+      <img
+        src="https://www.3roam.com/wp-content/uploads/2023/12/Radio-Frequency.png"
+        width="20"
+        height="20"
+        class="w-5 h-5"
+      />
+    </div>
+    <label class="mb-2 text-sm font-medium text-gray-900 dark:text-white mr-4"
+      >Run command</label
     >
     <select
       :disabled="disabledManualMode"
       v-model="runCmVal"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-32 p-2"
       :class="{
         'cursor-not-allowed opacity-70': disabledManualMode,
       }"

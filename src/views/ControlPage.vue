@@ -216,10 +216,10 @@ function submit() {
     <HeaderPage />
     <div class="flex flex-col h-full w-full">
       <HeaderTitle :title="'Control Page'" />
-      <div class="flex justify-center bg-[#F7EEDD] h-full">
+      <div class="flex justify-center h-full">
         <div class="flex flex-col space-y-4 mt-8">
           <div
-            class="flex justify-center space-x-8 border-2 p-2 rounded-xl bg-white"
+            class="flex justify-center space-x-8 border-2 rounded-xl bg-white p-4 border-blue-500"
           >
             <ToggleComponent
               v-model="modeVal"
@@ -232,50 +232,73 @@ function submit() {
               :firstLabel="'UNLOCK'"
             />
           </div>
-          <div class="flex space-x-8 border-2 p-2 rounded-xl bg-white">
+          <div
+            class="flex space-x-2 border-2 p-4 rounded-xl bg-white border-blue-500"
+          >
             <div class="space-y-2">
               <FormInput
                 :title="'Set point'"
                 v-model="setPointVal"
                 :disabled="disabledAutoMode"
+                img="https://i.imgur.com/vlSzdKc.png"
               />
               <FormInput
                 :title="'Min AO 1'"
                 v-model="minAo"
                 :disabled="disabledAutoMode"
+                img="https://static.vecteezy.com/system/resources/previews/006/559/603/original/voltmeter-line-icon-vector.jpg"
               />
               <FormInput
                 :title="'Max AO 1'"
                 v-model="maxAo"
                 :disabled="disabledAutoMode"
+                img="https://static.vecteezy.com/system/resources/previews/006/559/603/original/voltmeter-line-icon-vector.jpg"
               />
-              <FormInput :title="'D'" :model-value="d" :disabled="true" />
-              <FormInput :title="'P'" :model-value="p" :disabled="true" />
-              <FormInput :title="'i'" :model-value="i" :disabled="true" />
+              <FormInput
+                :title="'D'"
+                :model-value="d"
+                :disabled="true"
+                img="https://i.imgur.com/bkA0Lub.png"
+              />
+              <FormInput
+                :title="'P'"
+                :model-value="p"
+                :disabled="true"
+                img="https://i.imgur.com/KjJ0ysV.png"
+              />
+              <FormInput
+                :title="'i'"
+                :model-value="i"
+                :disabled="true"
+                img="https://i.imgur.com/thbClFL.png"
+              />
             </div>
             <div class="space-y-2">
               <OnOffComponent
                 :label="'Thermostat:'"
                 v-model="modeVal"
                 :disabled="disabledManualMode"
+                img="https://th.bing.com/th/id/OIP.z9KFg0Bp6el2SPpkRf4kBQHaHa?rs=1&pid=ImgDetMain"
               />
               <OnOffComponent
                 :label="'Valve:'"
                 v-model="modeVal"
                 :disabled="disabledManualMode"
+                img="https://i.imgur.com/MbOCXYA.png"
               />
               <FormInput
-                :title="'FRQ'"
+                :title="'Frequency'"
                 v-model="frqVal"
                 :disabled="disabledManualMode"
+                :img="'https://i.imgur.com/orfzzhE.png'"
               />
               <FormInput
-                :title="'ACC'"
+                :title="'Acceleration'"
                 v-model="accVal"
                 :disabled="disabledManualMode"
               />
               <FormInput
-                :title="'DEC'"
+                :title="'Deceleration'"
                 v-model="decVal"
                 :disabled="disabledManualMode"
               />

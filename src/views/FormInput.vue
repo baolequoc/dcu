@@ -1,10 +1,15 @@
 <template>
-  <div class="flex items-center space-x-4">
-    <label
-      class="flex text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 w-20 items-center"
-    >
-      <span>{{ title }} </span>
-    </label>
+  <div class="flex items-center justify-between">
+    <div class="flex">
+      <div>
+        <img :src="img" width="20" height="20" class="w-5 h-5 mr-4" />
+      </div>
+      <label
+        class="flex text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 w-20 items-center"
+      >
+        <span>{{ title }} </span>
+      </label>
+    </div>
     <input
       type="text"
       :value="modelValue"
@@ -29,6 +34,10 @@ defineProps({
   disabled: {
     type: Boolean,
     default: false,
+  },
+  img: {
+    type: String,
+    default: "https://www.svgrepo.com/show/522385/clock-1100.svg",
   },
 });
 

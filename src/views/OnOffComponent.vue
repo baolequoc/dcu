@@ -1,9 +1,10 @@
 <template>
   <div>
     <label class="flex items-center cursor-pointer justify-between h-10">
-      <span class="pr-5 ms-3 text-sm font-medium text-gray-900">{{
-        label
-      }}</span>
+      <div class="flex">
+        <img :src="img" width="20" height="20" class="w-5 h-5 mr-4" />
+        <span class="text-sm font-medium text-gray-900">{{ label }}</span>
+      </div>
       <div class="flex">
         <div class="mr-2">OFF</div>
         <input
@@ -22,6 +23,6 @@
   </div>
 </template>
 <script setup>
-defineProps(["modelValue", "label", "disabled"]);
+defineProps(["modelValue", "label", "disabled", "img"]);
 const emit = defineEmits(["update:modelValue"]);
 </script>
