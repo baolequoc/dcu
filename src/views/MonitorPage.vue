@@ -1,6 +1,6 @@
 <script setup>
 import { useFirebaseStore } from "../composable/useFirebase";
-import { onMounted, ref, watch } from "vue";
+import { onMounted, reactive, ref, watch, onBeforeUnmount } from "vue";
 import FormInput from "./FormInput.vue";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
@@ -31,16 +31,57 @@ ChartJS.register(
   Legend
 );
 
-const data = {
-  labels: ["January", "February", "March", "April", "May", "June", "July"],
+const timer = ref(0);
+const labels = [];
+const dataTemp = [];
+const step = 3; // 3s
+
+// onMounted(() => {
+//   setInterval(() => scheduleUpdateChart(), step * 1000);
+// });
+const data = ref({
+  labels: labels.value,
   datasets: [
     {
       label: "Temp",
       backgroundColor: "#f87979",
-      data: [40, 39, 10, 40, 39, 80, 40],
+      data: dataTemp.value,
     },
   ],
-};
+});
+// Instantiate
+onMounted(() => {
+  timer.value = setInterval(() => {
+    data.value = scheduleUpdateChart();
+  }, step * 1000);
+});
+
+// Clean up
+onBeforeUnmount(() => {
+  timer.value = null;
+});
+
+function scheduleUpdateChart() {
+  timer.value += step;
+  if (labels.length > 10) {
+    labels.shift();
+  }
+  if (dataTemp.length > 10) {
+    dataTemp.shift();
+  }
+  labels.push(timer.value);
+  dataTemp.push(temp.value);
+  return {
+    labels: labels,
+    datasets: [
+      {
+        label: "Temp",
+        backgroundColor: "#f87979",
+        data: dataTemp,
+      },
+    ],
+  };
+}
 
 const options = {
   responsive: true,
