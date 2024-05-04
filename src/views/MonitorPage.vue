@@ -35,10 +35,8 @@ const timer = ref(0);
 const labels = [];
 const dataTemp = [];
 const step = 3; // 3s
+const MAX_X = 15;
 
-// onMounted(() => {
-//   setInterval(() => scheduleUpdateChart(), step * 1000);
-// });
 const data = ref({
   labels: labels.value,
   datasets: [
@@ -63,13 +61,14 @@ onBeforeUnmount(() => {
 
 function scheduleUpdateChart() {
   timer.value += step;
-  if (labels.length > 10) {
+  if (labels.length > MAX_X) {
     labels.shift();
   }
-  if (dataTemp.length > 10) {
+  if (dataTemp.length > MAX_X) {
     dataTemp.shift();
   }
-  labels.push(timer.value);
+
+  labels.push(timestamp.value);
   dataTemp.push(temp.value);
   return {
     labels: labels,
@@ -101,6 +100,7 @@ const {
   mode,
   getMonitor,
   getControl,
+  timestamp,
   power,
 } = useFirebaseStore();
 

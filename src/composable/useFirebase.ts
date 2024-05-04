@@ -94,6 +94,12 @@ const [useProvideFirebaseStore, _useFirebaseStore] = createInjectionState(
     const valve = computed(() => {
       return dataControl?.value["VIRTUAL OV VALVE"]?.data || "0";
     });
+    const timestamp = computed(() => {
+      const hour = dataMonitor?.value["HOUR"]?.data || "0";
+      const minute = dataMonitor?.value["MINUTE"]?.data || "0";
+      const second = dataMonitor?.value["SECOND"]?.data || "0";
+      return `${hour}:${minute}:${second}`;
+    });
 
     async function getMonitor() {
       const monitorRef = ref(database, MONITOR_COL);
@@ -151,6 +157,7 @@ const [useProvideFirebaseStore, _useFirebaseStore] = createInjectionState(
       writeData,
       thermoStat,
       valve,
+      timestamp,
     };
   }
 );
