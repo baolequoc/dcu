@@ -18,7 +18,7 @@ defineProps({
 <template>
   <div class="flex flex-col rounded-lg">
     <div class="bg-slate-200 rounded-lg">
-      <div class="overflow-hidden bg-cover w-64 h-[200px] rounded-lg">
+      <div class="overflow-hidden bg-cover w-64 h-[180px] rounded-lg">
         <img :src="img" />
       </div>
       <div class="flex text-xl font-medium text-gray-700 justify-center my-8">

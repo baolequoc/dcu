@@ -25,11 +25,11 @@ onMounted(async () => {
     </div>
     <div class="flex justify-center space-x-32 p-32 bg-sky-100 h-full">
       <CardComponent
-        :title="'Giám sát'"
+        :title="'Monitor'"
         :img="'https://i.postimg.cc/KjxFm61Z/System-Monitoring-icon-Graphics-41194440-1-1-580x387.jpg'"
       />
       <CardComponent
-        :title="'Điều khiển'"
+        :title="'Control'"
         img="https://i.postimg.cc/MKrXT6VP/126530819-control-outline-icon-thin-line-concept-element-from-business-management-icons-collection-c.jpg"
         :url="'/control'"
       />
