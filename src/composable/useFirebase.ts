@@ -17,6 +17,7 @@ const [useProvideFirebaseStore, _useFirebaseStore] = createInjectionState(
       appId: "1:699243697856:web:d9deab885864d0f420ff25",
       measurementId: "G-GZ30SM2GRC",
     };
+
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
 

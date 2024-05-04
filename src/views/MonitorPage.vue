@@ -100,11 +100,13 @@ const {
   voltage,
   mode,
   getMonitor,
+  getControl,
   power,
 } = useFirebaseStore();
 
 onMounted(async () => {
   await getMonitor();
+  await getControl();
 });
 
 const triggerPress = ref("50");

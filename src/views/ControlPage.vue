@@ -10,6 +10,7 @@ import ToggleComponent from "./ToggleComponent.vue";
 import RunCMD from "./RunCMD.vue";
 import HeaderTitle from "./HeaderTitle.vue";
 const {
+  getMonitor,
   getControl,
   p,
   i,
@@ -58,6 +59,7 @@ const disabledManualMode = computed(() => {
 
 onMounted(async () => {
   await getControl();
+  await getMonitor();
 });
 
 // eslint-disable-next-line no-undef
